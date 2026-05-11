@@ -646,7 +646,7 @@ function svg_compress($element) {
         if (in_array($key, ['points', 'd'])) {
             $value = preg_replace_callback(
                 Regex::$patt->number,
-                function ($m) { return round($m[0], 2); },
+                function ($m) { return (string) round($m[0], 2); },
                 $value);
         }
     }
@@ -719,7 +719,7 @@ function svg_render($element) {
     }
     $svg[] = '</svg>';
 
-    return array_filter($svg, 'strlen');
+    return array_filter($svg, fn($s) => $s !== '');
 }
 
 
@@ -783,7 +783,7 @@ function svg_fn_pattern($input, $element) {
     Helpers.
 */
 function svg_parselist($str, $numbers = true) {
-    $list = preg_split('~ +~', trim($str));
+    $list = preg_split('~ +~', trim($str)) ?: [];
     return $numbers ? array_map('floatval', $list) : $list;
 }
 

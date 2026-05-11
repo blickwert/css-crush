@@ -1,3 +1,22 @@
+## 5.1.0 (2026-05-11)
+
+* Fixed fatal error in PHP 8.0+ when `csscrush_file()` receives a missing or
+  invalid file: `warning()` and `notice()` now guard against `null` process
+  before accessing `Crush::$process->errors` / `->warnings`.
+* Fixed type-safety issues in `Color::normalizeCssRgb()`, `cssHslToRgb()` and
+  the color-adjustment loop: added explicit `(float)` / `(string)` casts to
+  prevent implicit string-to-number coercion warnings under strict PHP config.
+* Fixed `preg_replace_callback` callback in SVG plugin returning `float`
+  instead of `string` (`round()` result now cast to `(string)`).
+* Replaced `array_filter($svg, 'strlen')` with a typed arrow function.
+* Added `?: []` fallback for `preg_split()` which can return `false`.
+* Migrated `phpunit.xml.dist` to PHPUnit 9.3 schema; replaced deprecated
+  `<filter><whitelist>` with `<coverage><include>`.
+* Minimum PHP version remains 8.1.
+
+
+********************************************************************
+
 ## 4.0.0 (2022-01-01)
 
 * Raised php requirement to >= 7

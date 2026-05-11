@@ -233,9 +233,8 @@ class Color
     public static function normalizeCssRgb(array $rgba)
     {
         foreach ($rgba as &$val) {
-            if (strpos($val, '%') !== false) {
-                $val = str_replace('%', '', $val);
-                $val = round($val * 2.55);
+            if (strpos((string) $val, '%') !== false) {
+                $val = round((float) str_replace('%', '', (string) $val) * 2.55);
             }
         }
 
@@ -262,8 +261,7 @@ class Color
 
         // Convert saturation and lightness to floats.
         foreach ($hsla as &$val) {
-            $val = str_replace('%', '', $val);
-            $val /= 100;
+            $val = (float) str_replace('%', '', (string) $val) / 100;
         }
         list($s, $l) = $hsla;
 
@@ -457,7 +455,7 @@ class Color
         foreach ($adjustments as $index => $val) {
 
             // Normalize argument.
-            $val = $val ? trim(str_replace('%', '', $val)) : 0;
+            $val = $val ? (float) trim(str_replace('%', '', (string) $val)) : 0;
 
             if ($val) {
                 // Reduce value to float.

@@ -4,6 +4,8 @@
 
 A CSS preprocessor designed to enable a modern and uncluttered CSS workflow.
 
+**Requires PHP 8.1+** (tested up to PHP 8.4)
+
 * Automatic vendor prefixing
 * Variables
 * Import inlining
